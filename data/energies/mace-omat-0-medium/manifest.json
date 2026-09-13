@@ -1,0 +1,60 @@
+{
+  "status": "complete",
+  "started_at_utc": "2026-09-13T18:23:25.973653+00:00",
+  "model_name": "mace-omat-0-medium",
+  "model_sha256": "d4b14be9afa294eebdbe31a0280b26a0fa29715771e978cbfd3ca24e0d90307a",
+  "model_source": {
+    "url": "https://github.com/ACEsuit/mace-foundations/releases/download/mace_omat_0/mace-omat-0-medium.model",
+    "sha256": "d4b14be9afa294eebdbe31a0280b26a0fa29715771e978cbfd3ca24e0d90307a",
+    "license": "ASL (Academic Software Licence)",
+    "training_data": "OMat24 (PBE/PBE+U)"
+  },
+  "device": "cuda",
+  "dtype": "float64",
+  "relaxation": "none; single point on the generated structure",
+  "min_distance_angstrom": 0.7,
+  "energy_convention": "energy_total_eV = MLIP total energy + MP2020 corrections (pymatgen MaterialsProject2020Compatibility with run type and Hubbard U from MPRelaxSet); comparable only with references on the same footing",
+  "packages": {
+    "mace-torch": "0.3.16",
+    "torch": "2.14.0",
+    "pymatgen": "2026.5.4",
+    "ase": "3.29.0",
+    "numpy": "2.5.3"
+  },
+  "python": "3.12.11",
+  "platform": "Linux-6.8.0-117-generic-x86_64-with-glibc2.39",
+  "script_sha256": "a1f9f440871179fbb876529a7da785b53ca556918f290f2642589954db2061d7",
+  "files": {
+    "gen_crystals_diffcsp-pp_energies.csv": {
+      "input": "data/gen_crystals_diffcsp-pp.csv",
+      "input_sha256": "2943d4f995c62394e8c4467faf0e705d39d285049d0c4ed033744ae763dc0eaa",
+      "n_rows": 5000,
+      "status_counts": {
+        "ok": 4997,
+        "too_close": 3
+      },
+      "csv_sha256": "47cf65520f7e318743c9734eb07c36fdcb3214b58178c52d28458b76b16d2b56"
+    },
+    "gen_crystals_mattergen_energies.csv": {
+      "input": "data/gen_crystals_mattergen.csv",
+      "input_sha256": "27882a221b421400d3b58d95713296c83d8d2985a9c366e9262c5bb2a3a05823",
+      "n_rows": 5000,
+      "status_counts": {
+        "ok": 4999,
+        "too_close": 1
+      },
+      "csv_sha256": "a3f79b81bb698a2bf310137d2ceee027c18065cb5e6db1bfc66f78c6eba88f8f"
+    },
+    "gen_crystals_wyformer_energies.csv": {
+      "input": "data/gen_crystals_wyformer.csv",
+      "input_sha256": "6645ae5fea0afe412e08dffa6e77ccadb82a17fdc41b38df6643512d3eafab0a",
+      "n_rows": 4998,
+      "status_counts": {
+        "ok": 4970,
+        "too_close": 28
+      },
+      "csv_sha256": "3324d9f3b955e7b2260ed6406f086af60aea8ea44b737ff870764006e248dd6b"
+    }
+  },
+  "finished_at_utc": "2026-09-13T18:33:24.555726+00:00"
+}

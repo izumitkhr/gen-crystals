@@ -7,13 +7,20 @@ The crystal structures were generated using the following three models:
 
 Each generative model was used to generate 5,000 crystal structures. For WyckoffTransformer, the dataset contains 4,998 structures that were successfully generated.
 
-## Accessing data
-To read a structure from the dataset (e.g., `gen_crystals_mattergen.csv`), where each row contains a CIF string in the `cif` column, you can use the following code:
+## Reading structures
+
+The generated structures are stored in `data/gen_crystals_<generator>.csv`
+(`mattergen`, `diffcsp-pp`, `wyformer`), one CIF string per row in the `cif` column:
 
 ```python
 import pandas as pd
 from pymatgen.core.structure import Structure
 
-df = pd.read_csv("gen_crystals_mattergen.csv")
-cif = df.iloc[0]["cif"]
-structure = Structure.from_str(cif, fmt="cif")
+df = pd.read_csv("data/gen_crystals_mattergen.csv")
+structure = Structure.from_str(df.iloc[0]["cif"], fmt="cif")
+```
+
+## Energies
+
+Single-point MLIP energies of the generated structures are provided in `data/energies/`.
+See [data/energies/README.md](data/energies/README.md) for the file format and how they were computed.

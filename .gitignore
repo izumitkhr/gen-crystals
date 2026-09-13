@@ -208,3 +208,5 @@ __marimo__/
 
 # outputs
 works/
+# MLIP model weights: download per README (not redistributed)
+/models/

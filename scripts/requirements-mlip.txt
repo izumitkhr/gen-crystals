@@ -1,0 +1,6 @@
+# Pinned environment used to produce data/energies/mace-omat-0-medium/ (Python 3.12).
+torch==2.14.0
+mace-torch==0.3.16
+pymatgen==2026.5.4
+ase==3.29.0
+numpy==2.5.3
