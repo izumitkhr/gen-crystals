@@ -31,8 +31,8 @@ import json
 import pandas as pd
 from pymatgen.core.composition import Composition
 
-structures = pd.read_csv("data/gen_crystals_mattergen.csv")
-energies = pd.read_csv("data/energies/mace-omat-0-medium/gen_crystals_mattergen_energies.csv")
+structures = pd.read_csv("data/gen_crystals_mattergen_base.csv")
+energies = pd.read_csv("data/energies/mace-omat-0-medium/gen_crystals_mattergen_base_energies.csv")
 df = structures.merge(energies[energies["status"] == "ok"], left_index=True, right_on="index")
 composition = Composition(json.loads(df.iloc[0]["composition"]))
 ```

@@ -1,6 +1,6 @@
 # Crystal structures generated using generative models
 This repository contains crystal structure data generated using generative models.
-The crystal structures were generated using the following three models:
+The crystal structures were generated using the following four models:
 - [MatterGen (base:Alex-MP-20)](https://github.com/microsoft/mattergen)
 - [MatterGen (mp_20_base:MP-20)](https://github.com/microsoft/mattergen)
 - [DiffCSP++](https://github.com/jiaor17/DiffCSP-PP)
@@ -11,13 +11,13 @@ Each generative model was used to generate 5,000 crystal structures. For Wyckoff
 ## Reading structures
 
 The generated structures are stored in `data/gen_crystals_<generator>.csv`
-(`mattergen`, `diffcsp-pp`, `wyformer`), one CIF string per row in the `cif` column:
+(`mattergen_base`, `mattergen_mp_20_base`, `diffcsp-pp`, `wyformer`), one CIF string per row in the `cif` column:
 
 ```python
 import pandas as pd
 from pymatgen.core.structure import Structure
 
-df = pd.read_csv("data/gen_crystals_mattergen.csv")
+df = pd.read_csv("data/gen_crystals_mattergen_base.csv")
 structure = Structure.from_str(df.iloc[0]["cif"], fmt="cif")
 ```
 

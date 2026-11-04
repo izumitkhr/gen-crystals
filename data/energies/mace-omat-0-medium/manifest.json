@@ -35,8 +35,8 @@
       },
       "csv_sha256": "47cf65520f7e318743c9734eb07c36fdcb3214b58178c52d28458b76b16d2b56"
     },
-    "gen_crystals_mattergen_energies.csv": {
-      "input": "data/gen_crystals_mattergen.csv",
+    "gen_crystals_mattergen_base_energies.csv": {
+      "input": "data/gen_crystals_mattergen_base.csv",
       "input_sha256": "27882a221b421400d3b58d95713296c83d8d2985a9c366e9262c5bb2a3a05823",
       "n_rows": 5000,
       "status_counts": {
@@ -54,6 +54,18 @@
         "too_close": 28
       },
       "csv_sha256": "3324d9f3b955e7b2260ed6406f086af60aea8ea44b737ff870764006e248dd6b"
+    },
+    "gen_crystals_mattergen_mp_20_base_energies.csv": {
+      "input": "data/gen_crystals_mattergen_mp_20_base.csv",
+      "input_sha256": "e4b182155872c5b765ecdd69687604d2f2a6169499e317911b2af7f5afc2e217",
+      "n_rows": 5000,
+      "status_counts": {
+        "ok": 4995,
+        "too_close": 5
+      },
+      "csv_sha256": "c8e18384b4907c8beae3809737efcf5886208d91a0f401f92e51a8d996758b01",
+      "started_at_utc": "2026-11-04T06:04:18.881414+00:00",
+      "finished_at_utc": "2026-11-04T06:07:45.887030+00:00"
     }
   },
   "finished_at_utc": "2026-09-13T18:33:24.555726+00:00"
