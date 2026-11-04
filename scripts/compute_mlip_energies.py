@@ -39,8 +39,19 @@ MODEL_SOURCES = {
         "sha256": "d4b14be9afa294eebdbe31a0280b26a0fa29715771e978cbfd3ca24e0d90307a",
         "license": "ASL (Academic Software Licence)",
         "training_data": "OMat24 (PBE/PBE+U)",
-    }
+    },
+    "mace-matpes-r2scan-0": {
+        "url": "https://github.com/ACEsuit/mace-foundations/releases/download/mace_matpes_0/MACE-matpes-r2scan-omat-ft.model",
+        # The release does not publish a checksum; this is the SHA256 of the file downloaded
+        # from the URL above on 2026-11-04 (79,470,738 bytes, matching the release asset size).
+        "sha256": "8f147ecffa1d06a696e5648b13b81abda9c96fda9d0fb3faba3cd3fb27d9bba9",
+        "license": "ASL (Academic Software Licence)",
+        "training_data": "MACE-OMAT-0 fine-tuned on MatPES (r2SCAN)",
+    },
 }
+# Energy correction schemes. MP2020 is calibrated for PBE/PBE+U energies only, so it must not be
+# applied to r2SCAN energies; use "none" there and keep the raw MLIP energy.
+CORRECTIONS = ("mp2020", "none")
 COLUMNS = [
     "index",
     "status",
@@ -102,6 +113,16 @@ def evaluate(structure, calc, compat, entry_id):
     raw = float(atoms.get_potential_energy())
     if not math.isfinite(raw):
         raise ValueError("non-finite MLIP energy")
+    if compat is None:  # --correction none: raw MLIP energy, correction columns left empty
+        return {
+            "energy_total_eV": raw,
+            "energy_per_atom_eV": raw / len(structure),
+            "uncorrected_energy_total_eV": raw,
+            "mp2020_correction_eV": "",
+            "mp2020_adjustments": "",
+            "run_type": "",
+            "hubbards": "",
+        }
     parameters = mp_parameters(structure)
     entry = ComputedStructureEntry(structure, raw, parameters=parameters, entry_id=entry_id)
     processed = compat.process_entries([entry], clean=True, inplace=False)
@@ -169,6 +190,12 @@ def main():
     parser.add_argument("--device", default="cuda")
     parser.add_argument("--dtype", default="float64", choices=["float32", "float64"])
     parser.add_argument("--min-distance", type=float, default=MIN_DISTANCE_ANGSTROM)
+    parser.add_argument(
+        "--correction",
+        choices=CORRECTIONS,
+        default="mp2020",
+        help="mp2020 for PBE/PBE+U-level models; none for r2SCAN-level models",
+    )
     parser.add_argument("--limit", type=int, help="Structures per file (testing)")
     parser.add_argument("--output-dir", type=Path)
     args = parser.parse_args()
@@ -185,7 +212,20 @@ def main():
     calc = MACECalculator(
         model_paths=[str(args.model)], device=args.device, default_dtype=args.dtype
     )
-    compat = MaterialsProject2020Compatibility(check_potcar=False)
+    if args.correction == "mp2020":
+        compat = MaterialsProject2020Compatibility(check_potcar=False)
+        energy_convention = (
+            "energy_total_eV = MLIP total energy + MP2020 corrections (pymatgen "
+            "MaterialsProject2020Compatibility with run type and Hubbard U from "
+            "MPRelaxSet); comparable only with references on the same footing"
+        )
+    else:
+        compat = None
+        energy_convention = (
+            "energy_total_eV = raw MLIP total energy (no corrections; mp2020_* and "
+            "run_type/hubbards columns are empty); comparable only with references on "
+            "the same footing"
+        )
     manifest = {
         "status": "in_progress",
         "started_at_utc": datetime.now(UTC).isoformat(),
@@ -196,11 +236,8 @@ def main():
         "dtype": args.dtype,
         "relaxation": "none; single point on the generated structure",
         "min_distance_angstrom": args.min_distance,
-        "energy_convention": (
-            "energy_total_eV = MLIP total energy + MP2020 corrections (pymatgen "
-            "MaterialsProject2020Compatibility with run type and Hubbard U from "
-            "MPRelaxSet); comparable only with references on the same footing"
-        ),
+        "correction": args.correction,
+        "energy_convention": energy_convention,
         "packages": {n: version(n) for n in ["mace-torch", "torch", "pymatgen", "ase", "numpy"]},
         "python": sys.version.split()[0],
         "platform": platform.platform(),

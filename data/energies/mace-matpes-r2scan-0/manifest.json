@@ -1,0 +1,71 @@
+{
+  "status": "complete",
+  "started_at_utc": "2026-11-04T07:26:54.522528+00:00",
+  "model_name": "mace-matpes-r2scan-0",
+  "model_sha256": "8f147ecffa1d06a696e5648b13b81abda9c96fda9d0fb3faba3cd3fb27d9bba9",
+  "model_source": {
+    "url": "https://github.com/ACEsuit/mace-foundations/releases/download/mace_matpes_0/MACE-matpes-r2scan-omat-ft.model",
+    "sha256": "8f147ecffa1d06a696e5648b13b81abda9c96fda9d0fb3faba3cd3fb27d9bba9",
+    "license": "ASL (Academic Software Licence)",
+    "training_data": "MACE-OMAT-0 fine-tuned on MatPES (r2SCAN)"
+  },
+  "device": "cuda",
+  "dtype": "float64",
+  "relaxation": "none; single point on the generated structure",
+  "min_distance_angstrom": 0.7,
+  "correction": "none",
+  "energy_convention": "energy_total_eV = raw MLIP total energy (no corrections; mp2020_* and run_type/hubbards columns are empty); comparable only with references on the same footing",
+  "packages": {
+    "mace-torch": "0.3.16",
+    "torch": "2.14.0",
+    "pymatgen": "2026.5.4",
+    "ase": "3.29.0",
+    "numpy": "2.5.3"
+  },
+  "python": "3.12.11",
+  "platform": "Linux-6.8.0-117-generic-x86_64-with-glibc2.39",
+  "script_sha256": "f61c34e6a424c6072848ef5666d64945153b00aa310733bae650929aa529b68a",
+  "files": {
+    "gen_crystals_diffcsp-pp_energies.csv": {
+      "input": "data/gen_crystals_diffcsp-pp.csv",
+      "input_sha256": "2943d4f995c62394e8c4467faf0e705d39d285049d0c4ed033744ae763dc0eaa",
+      "n_rows": 5000,
+      "status_counts": {
+        "ok": 4997,
+        "too_close": 3
+      },
+      "csv_sha256": "403fb1612bd795ba906c7db5d6d2f72cd3f9a44d5403d656081b52b38258be13"
+    },
+    "gen_crystals_mattergen_base_energies.csv": {
+      "input": "data/gen_crystals_mattergen_base.csv",
+      "input_sha256": "27882a221b421400d3b58d95713296c83d8d2985a9c366e9262c5bb2a3a05823",
+      "n_rows": 5000,
+      "status_counts": {
+        "ok": 4999,
+        "too_close": 1
+      },
+      "csv_sha256": "0b9d1218c56dfd2e0e2ce3d2f55ff5b3bce28784d22f2fbd95204080e4da87f6"
+    },
+    "gen_crystals_mattergen_mp_20_base_energies.csv": {
+      "input": "data/gen_crystals_mattergen_mp_20_base.csv",
+      "input_sha256": "e4b182155872c5b765ecdd69687604d2f2a6169499e317911b2af7f5afc2e217",
+      "n_rows": 5000,
+      "status_counts": {
+        "ok": 4995,
+        "too_close": 5
+      },
+      "csv_sha256": "af24bd0d19acfb47a19edc150c4264925dc44f4bf127a201574f35bd044f3127"
+    },
+    "gen_crystals_wyformer_energies.csv": {
+      "input": "data/gen_crystals_wyformer.csv",
+      "input_sha256": "6645ae5fea0afe412e08dffa6e77ccadb82a17fdc41b38df6643512d3eafab0a",
+      "n_rows": 4998,
+      "status_counts": {
+        "ok": 4970,
+        "too_close": 28
+      },
+      "csv_sha256": "110f09dc9d2ef4cbbf90e1f30797901211cb9e810168c2ef59a83d469928e0d8"
+    }
+  },
+  "finished_at_utc": "2026-11-04T07:40:23.613617+00:00"
+}
