@@ -1,7 +1,8 @@
 # Crystal structures generated using generative models
 This repository contains crystal structure data generated using generative models.
 The crystal structures were generated using the following three models:
-- [MatterGen](https://github.com/microsoft/mattergen)
+- [MatterGen (base:Alex-MP-20)](https://github.com/microsoft/mattergen)
+- [MatterGen (mp_20_base:MP-20)](https://github.com/microsoft/mattergen)
 - [DiffCSP++](https://github.com/jiaor17/DiffCSP-PP)
 - [WyckoffTransformer](https://github.com/SymmetryAdvantage/WyckoffTransformer) with DiffCSP++ relaxation
 
