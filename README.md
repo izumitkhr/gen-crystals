@@ -1,4 +1,3 @@
-# Crystal structures generated using generative models
 This repository contains crystal structure data generated using generative models.
 The crystal structures were generated using the following four models:
 - [MatterGen (base:Alex-MP-20)](https://github.com/microsoft/mattergen)
